@@ -3,7 +3,7 @@ currentSong.volume = 0.4
 let idG = 0
 let name1 = document.getElementsByClassName("song-name")[0]
 async function getSongs() {
-    let a = await fetch("http://127.0.0.1:5500/Assets%20for%20Spotify/Songs/")
+    let a = await fetch("https://github.com/SurajSG23/Spotify-Clone/blob/main/Assets%20for%20Spotify/Songs/")
     let response = await a.text();
     console.log(response);
     let div = document.createElement("div");
