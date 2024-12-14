@@ -45,8 +45,7 @@ async function playFavMusic(id) {
     document.getElementsByClassName("songtime")[0].style.opacity = "0.7";
     document.getElementsByClassName("seek")[0].style.opacity = "0.7";
     document.getElementsByClassName("play-bar")[0].style.bottom = "-1px";
-    name1.innerHTML =
-        songs[id].replaceAll("%20", " ").split("/Songs/")[1].split(".mp3")[0];
+    name1.innerHTML = songs[id].split("/Songs/")[1].replace(".mp3", "").replaceAll("%20", " ");
 }
 
 prev.addEventListener("click", async () => {
@@ -83,10 +82,9 @@ async function main() {
                         </li>`;
     }
 
-    let b = document.getElementsByClassName("green-play");
-
-    for (let index = 0; index < b.length; index++) {
-        b[index].addEventListener("click", () => {
+    let playButtons = document.getElementsByClassName("play-3");
+    for (let index = 0; index < playButtons.length; index++) {
+        playButtons[index].addEventListener("click", () => {
             playFavMusic(index);
             idG = index;
             play.innerHTML = `<i class="fa-solid fa-pause"></i>`;
@@ -101,21 +99,18 @@ async function main() {
             (currentSong.currentTime / currentSong.duration) * 100 + "%";
     });
 
-    document
-        .getElementsByClassName("seekBar")[0]
-        .addEventListener("click", (e) => {
-            let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
-            document.getElementsByClassName("circle")[0].style.left = percent + "%";
-            currentSong.currentTime = (currentSong.duration * percent) / 100;
-        });
+    document.getElementsByClassName("seekBar")[0].addEventListener("click", (e) => {
+        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+        document.getElementsByClassName("circle")[0].style.left = percent + "%";
+        currentSong.currentTime = (currentSong.duration * percent) / 100;
+    });
 
     let slider = document.getElementById("volume");
     slider.addEventListener("mousemove", () => {
         slider.style.background =
-            "linear-gradient(90deg,rgb(162, 162, 162) " +
+            "linear-gradient(90deg, rgb(162, 162, 162) " +
             slider.value +
-            "%" +
-            ",white " +
+            "%, white " +
             slider.value +
             "%)";
     });
